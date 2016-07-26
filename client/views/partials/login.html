@@ -1,0 +1,6 @@
+<h1>Login</h1>
+<form ng-submit="login()" name="loginForm">
+Your name: <input type="text" name="name" ng-model="user.name" autofocus/>
+<input type="submit" class="btn btn-xs btn-primary" value="log in!" required>
+<p ng-repeat="err in errors" class="text-danger">{{err.message}}</p>
+</form>

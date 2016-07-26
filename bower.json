@@ -1,0 +1,24 @@
+{
+  "name": "file_structure",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "Shay Culpepper <shaypepper@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.7",
+    "angular-route": "^1.5.7",
+    "moment": "^2.14.1",
+    "angular-messages": "^1.5.7",
+    "angular-bootstrap": "^2.0.0"
+  }
+}
