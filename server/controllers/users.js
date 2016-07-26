@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
-var bcrypt = require('bcrypt');
+// var bcrypt = require('bcrypt');
 
 function sendResults(res) {
   return (err, result) => { res.json(err? err: result); }
