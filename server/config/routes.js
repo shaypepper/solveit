@@ -6,11 +6,19 @@ var votes = require('../controllers/votes.js')
 
 console.log('routes');
 module.exports = function(app){
-  app.post('/topics', topics.create);
+
+  // TOPICS 
   app.get('/topics', topics.index); 
+  app.post('/topics', topics.create);
   app.get('/topics/:id', topics.show);
   app.put('/topics/:id', topics.update);
   app.delete('/topics/:id', topics.destroy);
+
+  app.get('/ideas', ideas.index); 
+  app.post('/ideas', ideas.create);
+  app.get('/ideas/:id', ideas.show);
+  app.put('/ideas/:id', ideas.update);
+  app.delete('/ideas/:id', ideas.destroy);
 
   app.post('/topics/:id/idea', ideas.create);      // post idea on topic
   app.get('/topics/:id/ideas', ideas.index);      // post idea on topic
