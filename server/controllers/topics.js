@@ -24,7 +24,7 @@ module.exports = {
       .exec( sendResults(res)) },
   show:  (req,res) => { 
     Topic.findById(req.params.id)
-      .populate('ideas _user resources questions')
+      .populate('ideas _user resources')
       .exec(sendResults(res)) 
   },
   create: (req,res) => {
