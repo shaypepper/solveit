@@ -27,6 +27,9 @@ module.exports = {
   show:  (req,res) => { 
     Idea.findById(req.params.id, sendResults(res)) 
   },
+  update: (req,res) => {
+
+  },
   create: (req,res) => {
     if (!req.session._id) {
       sendError(res, 'login','Please Login'); 
@@ -52,7 +55,7 @@ module.exports = {
       ); // end of topicFindAndupdate
     }); // end of idea.save
   }, // end of create function
-  delete: (req,res) => { 
+  destroy: (req,res) => { 
     Idea.remove({_id: req.params.id, _user: req.session._id}, 
       (err) => { res.json( err? err : {}); }
     ) 
