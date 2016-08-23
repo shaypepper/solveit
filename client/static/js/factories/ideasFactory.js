@@ -1,6 +1,6 @@
-console.log('Idea Factory');
+console.log('Ideas Factory');
 
-app.factory('ideaFactory', ['$http', function($http, $cookies){
+app.factory('ideasFactory', ['$http', function($http, $cookies){
 	function checkAndRun(callback){
 		return data => { if (typeof(callback) == 'function') callback(data.data);}
 	}
@@ -22,7 +22,7 @@ app.factory('ideaFactory', ['$http', function($http, $cookies){
 				.then(checkAndRun(callback))
 		},
 		delete: (ideaID, callback) => {
-			$http.delete ('/ideas/'+ideaID)
+			$http.delete('/ideas/'+ideaID)
 				.then(checkAndRun(callback))
 		}
  	}
