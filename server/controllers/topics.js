@@ -36,16 +36,13 @@ module.exports = {
     topic._user = req.session._id;
     topic.save(sendResults(res));
   },
+  update: (req,res) => {
+    
+  }
+
   // delete: (req,res) => { 
   //   Topic.remove({_id: req.params.id, _user: req.session._id}, 
   //     (err) => { res.json( err? err : {}); }
   //   ) 
-  // },
-  vote_up: (req,res) => {
-    Topic.findById(req.params.topic_id, (err, result)=>{
-        if (err || !result) { res.json(err); return; }
-        result.options[req.params.option_id].votes += 1;
-        result.save(sendResults(res))
-      })
-  }
+  // }
 }
