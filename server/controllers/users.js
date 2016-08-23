@@ -10,26 +10,28 @@ function sendError(res, cat, err) {
   errorObj['errors'][cat] = {message: err}
   res.json(errorObj);
 }
-
-var ID = req => ({_id: req.params.id})
+function setSession(req, res, result) {
+  req.session._id = result._id;
+  req.session.name = result.name;
+  res.json(result);
+}
 
 module.exports = {
-  login: (req,res) => {
+  login: (req, res) => {
     User.findOne({name: req.body.name}, (err, result) => {
       if (err) { 
         res.json(err); return; 
       } else if (result) {
-        req.session._id = result._id;
-        req.session.name = result.name;
-        res.json(result);
+        setSession(req, res, result);
       } else {
         var new_user = new User({name: req.body.name});
         new_user.save((err, result) => {
+          console.log(result, err)
           if (!result || !result.errors) {
-            req.session._id = result._id;
-            req.session.name = result.name;
+            setSession(req, res, result);
+          } else {
+            res.json(result)
           }
-          res.json(result);
         })
       }
     })
@@ -38,17 +40,11 @@ module.exports = {
     req.session.destroy();
     res.json({});
   },
-  session: (req,res) => {
-    res.json(req.session)
-  },
-  update: (req,res) => { 
-    User.findOneAndUpdate(
-      ID(req), 
-      {$set: bodyData(req, userFields)}, 
-      {runValidations: true},
+  session: (req,res) => { res.json(req.session) },
+  delete:  (req,res) => { 
+    User.findByIdAndRemove(req.params.id, 
       sendResults(res)
     ) 
-  },
-  delete: (req,res) => { User.remove(ID(req), sendResults(res)) }
+  }
 }
 

@@ -5,7 +5,6 @@ var qFields = ['options','text']
 function sendResults(res) {
   return (err, result) => { res.json(err? err: result); }
 }
-
 function sendError(res, cat, err) {
   var errorObj = {errors: {}}
   errorObj['errors'][cat] = {message: err}
@@ -25,11 +24,9 @@ module.exports = {
       .populate('_user')
       .exec( sendResults(res)) },
   show:  (req,res) => { 
-    Question.findOne({_id: req.params.id}, 
-    sendResults(res)) 
+    Question.findById(req.params.id, sendResults(res)) 
   },
   create: (req,res) => {
-    console.log(req.session)
     if (!req.session._id) {
       sendError(res, 'login','Please Login'); 
       return;
@@ -43,7 +40,7 @@ module.exports = {
       question.options.push({text: req.body.options[i]});
     }
     question._user = req.session._id;
-    question.save(sendResults(res))
+    question.save(sendResults(res));
   },
   delete: (req,res) => { 
     Question.remove({_id: req.params.id, _user: req.session._id}, 
@@ -51,9 +48,8 @@ module.exports = {
     ) 
   },
   vote_up: (req,res) => {
-    Question.findOne({_id: req.params.question_id}, (err, result)=>{
-        if (err) { res.json(err); return; }
-        if (!result) { res.json(err); return; }
+    Question.findById(req.params.question_id, (err, result)=>{
+        if (err || !result) { res.json(err); return; }
         result.options[req.params.option_id].votes += 1;
         result.save(sendResults(res))
       })
