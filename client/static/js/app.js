@@ -5,14 +5,6 @@ app.config(function ($routeProvider) {
       templateUrl: '/partials/index.html',
       controller: 'indexController'
     })
-    .when('/new', {
-      templateUrl: '/partials/new.html',
-      controller: 'newController'
-    })
-    .when('/poll/:id', {
-      templateUrl: '/partials/poll.html',
-      controller: 'pollController'
-    })
     .when('/login', {
       templateUrl: '/partials/login.html',
       controller: 'loginController'
