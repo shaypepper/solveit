@@ -1,4 +1,4 @@
-console.log('Topic Factory')
+console.log('Topics Factory')
 app.factory('topicsFactory', ['$http','$cookies', function($http, $cookies) {
   function checkAndRun(callback) {
     return data => { if (typeof(callback) == 'function') callback(data.data); }
