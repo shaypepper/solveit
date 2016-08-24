@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>New Topic</title>
+</head>
+<body>
+	<h1>Create a Topic</h1>
+	<form>
+		<h3>Name your topic:<input type="text" ng-model="newTopic.title"></h3>
+		<h3>Describe your topic:<input type="textarea" ng-model="newTopic.description"></h3>
+		<input type="submit" value="Add Topic" ng-click="addTopic()">
+	</form>
+</body>
+</html>
