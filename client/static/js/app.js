@@ -9,6 +9,10 @@ app.config(function ($routeProvider) {
       templateUrl: '/partials/topics/index.html',
       controller: 'topicsIndexController'
     })
+    .when('/topics/:id', {
+      templateUrl: '/partials/topics/show.html',
+      controller: 'topicsShowController'
+    })
     .when('/login', {
       templateUrl: '/partials/login.html',
       controller: 'loginController'
