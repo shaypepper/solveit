@@ -22,39 +22,39 @@ function bodyData(req, fields){
 
 module.exports = {
   index: (req,res) => { 
-    Idea.find({_topic: req.params.id})
+    Response.find({_topic: req.params.id})
       .populate('_user')
       .exec( sendResults(res)) },
   show:  (req,res) => { 
-    Idea.findById(req.params.id, sendResults(res)) 
+    Response.findById(req.params.id, sendResults(res)) 
   },
   create: (req,res) => {
     if (!req.session._id) {
       sendError(res, 'login','Please Login'); 
       return;
     }
-    var idea = new Idea(bodyData(req, ['text', 'title']));
-    idea._user = req.session._id;
-    idea._topic = req.params.id;
-    idea.save((err, idea) => {
+    var response = new Response(bodyData(req, ['text', 'agree']));
+    response._user = req.session._id;
+    response._idea = req.params.id;
+    response.save((err, response) => {
       if (err) { res.json(err); return; }
-      Topic.findByIdAndUpdate(
+      Response.findByIdAndUpdate(
         req.params.id, 
-        {$push: {ideas: idea._id}},
+        {$push: {ideas: response._id}},
         (err, topic) => { 
           User.findByIdAndUpdate(
             req.params._id, 
-            {$push: {ideas: idea._id}},
+            {$push: {ideas: response._id}},
             (err, user) => {
-              sendResults(res)(err, idea)
+              sendResults(res)(err, response)
             } // end of userUpdate callback
           ); // end of userFindAndUpdate
         } // end of topicFindAndupdate callback
       ); // end of topicFindAndupdate
-    }); // end of idea.save
+    }); // end of response.save
   }, // end of create function
   delete: (req,res) => { 
-    Idea.remove({_id: req.params.id, _user: req.session._id}, 
+    Response.remove({_id: req.params.id, _user: req.session._id}, 
       (err) => { res.json( err? err : {}); }
     ) 
   }

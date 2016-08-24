@@ -41,8 +41,8 @@ mongoose.model('Idea', new Schema({
 }, TS))
 
 mongoose.model('Topic', new Schema({
-  title:         reqField(String,'Please provide a topic title'),
-  description:   reqField(String,'Please provide a topic description'),
+  title:         reqField(String, 'Please provide a topic title'),
+  description:   reqField(String, 'Please provide a topic description'),
   ideas:        [refTo('Idea')],
   resources:    [refTo('Resource')],
   categories:   [refTo('Category')]
