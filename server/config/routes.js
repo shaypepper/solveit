@@ -3,6 +3,8 @@ var topics = require('../controllers/topics.js')
 var users = require('../controllers/users.js')
 var ideas = require('../controllers/ideas.js')
 var votes = require('../controllers/votes.js')
+var resources = require('../controllers/resources.js')
+var responses = require('../controllers/responses.js')
 
 console.log('routes');
 module.exports = function(app){
@@ -14,14 +16,15 @@ module.exports = function(app){
   app.put('/topics/:id', topics.update);
   app.delete('/topics/:id', topics.destroy);
 
-  app.get('/ideas', ideas.index); 
-  app.post('/ideas', ideas.create);
+  app.post('/topics/:id/ideas', ideas.create);      // post idea on topic
+  app.get('/topics/:id/ideas', ideas.index); 
   app.get('/ideas/:id', ideas.show);
   app.put('/ideas/:id', ideas.update);
   app.delete('/ideas/:id', ideas.destroy);
 
-  app.post('/topics/:id/idea', ideas.create);      // post idea on topic
-  app.get('/topics/:id/ideas', ideas.index);      // post idea on topic
+  app.post('/ideas/:id/responses', responses.create);      // post idea on topic
+  app.get('/ideas/:id/responses', responses.index); 
+
 
   // app.post('/topics/:topic_id/:option_id', topics.up_vote);
 
