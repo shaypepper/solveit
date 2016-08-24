@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 var app = angular.module('app', ['ngRoute', 'ngMessages', 'ngCookies']);
 app.config(function ($routeProvider) {
   $routeProvider
@@ -15,21 +14,6 @@ app.config(function ($routeProvider) {
       controller: 'topicsShowController'
     })
     .when('/login', {
-      templateUrl: '/partials/login.html',
-      controller: 'loginController'
-    })
-    .otherwise({
-      redirectTo: '/'
-    });
-=======
-var app = angular.module('app', ['ngRoute', 'ngMessages', 'ngCookies']);
-app.config(function ($routeProvider) {
-  $routeProvider
-    .when('/', {
-      templateUrl: '/partials/index.html',
-      controller: 'indexController'
-    })
-    .when('/login', {
       templateUrl: '/partials/users/login.html',
       controller: 'loginController'
     })
@@ -40,5 +24,4 @@ app.config(function ($routeProvider) {
     .otherwise({
       redirectTo: '/'
     });
->>>>>>> topic_form
 });
