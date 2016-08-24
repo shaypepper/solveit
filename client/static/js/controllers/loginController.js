@@ -1,7 +1,7 @@
 app.controller('loginController', 
   ['$scope','usersFactory', '$location', '$cookies',
   function($scope, usersFactory, $location, $cookies) {
-    usersFactory.session($location, $scope);
+    // usersFactory.session($location, $scope);
     $scope.login = () => {
       if (!$scope.user) {
         $scope.errors = {'login': {message: 'Please provide a name'}};
@@ -9,7 +9,7 @@ app.controller('loginController',
       }
       usersFactory.login($scope.user, (data)=>{
         if (data.errors) $scope.errors = data.errors;
-        else $location.url('/')
+        else $location.url('/topics')
       })
     }
   }

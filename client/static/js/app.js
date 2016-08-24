@@ -9,6 +9,10 @@ app.config(function ($routeProvider) {
       templateUrl: '/partials/topics/index.html',
       controller: 'topicsIndexController'
     })
+    .when('/topics/new', {
+      templateUrl: '/partials/topics/new.html',
+      controller: 'topicsNewController'
+    })
     .when('/topics/:id', {
       templateUrl: '/partials/topics/show.html',
       controller: 'topicsShowController'
@@ -16,10 +20,6 @@ app.config(function ($routeProvider) {
     .when('/login', {
       templateUrl: '/partials/users/login.html',
       controller: 'loginController'
-    })
-    .when('/topics/new', {
-      templateUrl: '/partials/topics/new.html',
-      controller: 'topicsNewController'
     })
     .otherwise({
       redirectTo: '/'

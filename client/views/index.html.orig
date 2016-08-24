@@ -1,0 +1,63 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<!-- DONT FORGET TO ADD YOUR ANGULAR APP! -->
+<html ng-app='app'>
+  <head>
+    <meta charset="utf-8">
+    <title>Solve It</title>
+    <link rel="stylesheet" type="text/css" href="css/w3.css">
+    <style type="text/css"> #wrapper { width: 80%; margin: auto;} </style>
+    <!-- Angular from bower_components, otherwise find the CDN -->
+    <script src="angular/angular.js" charset="utf-8"></script>
+    <script src="angular-route/angular-route.js" charset="utf-8"></script>
+    <script src="angular-messages/angular-messages.js" charset="utf-8"></script>
+    <script src="angular-cookies/angular-cookies.js" charset="utf-8"></script>
+    <script src="moment/moment.js" charset="utf-8"></script>
+    <!-- End Bower Components -->
+    <script src="js/app.js" charset="utf-8"></script>
+    <script src="js/controllers/loginController.js" charset="utf-8"></script>
+    <script src="js/controllers/indexController.js" charset="utf-8"></script>
+    <script src="js/controllers/topicsIndexController.js" charset="utf-8"></script>
+    <script src="js/controllers/topicsShowController.js" charset="utf-8"></script>
+    <script src="js/controllers/topicsNewController.js" charset="utf-8"></script>
+    <script src="js/factories/usersFactory.js" charset="utf-8"></script>
+    <script src="js/factories/topicsFactory.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div id="wrapper" class="container-fluid" ng-view=''>
+        HEY
+    </div>
+  </body>
+</html>
+=======
+<!DOCTYPE html>
+<!-- DONT FORGET TO ADD YOUR ANGULAR APP! -->
+<html ng-app='app'>
+  <head>
+    <meta charset="utf-8">
+    <title>Solve It</title>
+    <link rel="stylesheet" type="text/css" href="css/w3.css">
+    <style type="text/css"> #wrapper { width: 80%; margin: auto;} </style>
+    <!-- Angular from bower_components, otherwise find the CDN -->
+    <script src="angular/angular.js" charset="utf-8"></script>
+    <script src="angular-route/angular-route.js" charset="utf-8"></script>
+    <script src="angular-messages/angular-messages.js" charset="utf-8"></script>
+    <script src="angular-cookies/angular-cookies.js" charset="utf-8"></script>
+    <script src="moment/moment.js" charset="utf-8"></script>
+    <!-- End Bower Components -->
+    <script src="js/app.js" charset="utf-8"></script>
+    <script src="js/controllers/loginController.js" charset="utf-8"></script>
+    <script src="js/controllers/indexController.js" charset="utf-8"></script>
+<script src="js/controllers/topicsNewController.js" charset="utf-8"></script>
+    <script src="js/controllers/topicsIndexController.js" charset="utf-8"></script>
+    <script src="js/controllers/topicsShowController.js" charset="utf-8"></script>
+    <script src="js/factories/usersFactory.js" charset="utf-8"></script>
+    <script src="js/factories/topicsFactory.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div id="wrapper" class="container-fluid" ng-view=''>
+        HEY
+    </div>
+  </body>
+</html>
+>>>>>>> dedff1716ccd759b7953ea0982761c2fc35cf5bc
