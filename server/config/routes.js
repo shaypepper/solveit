@@ -18,6 +18,7 @@ module.exports = function(app){
 
   app.post('/topics/:id/ideas', ideas.create);      // post idea on topic
   app.get('/topics/:id/ideas', ideas.index); 
+  app.get('/ideas', ideas.index);
   app.get('/ideas/:id', ideas.show);
   app.put('/ideas/:id', ideas.update);
   app.delete('/ideas/:id', ideas.destroy);

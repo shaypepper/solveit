@@ -1,18 +1,14 @@
-<div class="w3-row w3-section">
-  <div class="w3-half">
-    <h1>{{pageTitle}}</h1>
-  </div>
-  <div class="w3-half w3-container">
-    <p  ng-if="userName" class="w3-right">
-      <a class="w3-btn w3-hover-purple" href="/#/topics/new">Add New Topic</a>
-      <a class="w3-btn w3-hover-purple" href="/#/logout">Logout</a>
-    </p>
-    <p ng-if="!userName" class="w3-right">
-      <a class="w3-btn w3-hover-purple" href="/#/login">Login</a>
-    </p>
-
-    <p ng-if="userName" class="w3-left">
-      Hi, {{userName}}.
-    </p>
-  </div>  
-</div>
+<ul class="w3-navbar w3-black">
+  <li class="w3-navitem">
+    <h3>solve.it</h3>
+  </li>
+  <li class="w3-right" ng-if="userId"> 
+    <a class="w3-hover-text-blue w3-hover-none" href="/#/logout">Logout</a>
+  </li>
+  <li class="w3-right w3-navitem w3-text-yellow" ng-if="userId"> 
+    Hello, {{ userName }}!
+  </li>
+  <li class="w3-right" ng-if="!userId">
+    <a class="w3-hover-text-blue w3-hover-none" href="/#/login">Login</a>
+  </li>
+</ul>

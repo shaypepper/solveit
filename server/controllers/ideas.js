@@ -20,9 +20,10 @@ function bodyData(req, fields){
 }
 
 module.exports = {
-  index: (req,res) => { 
-    Idea.find({_topic: req.params.id})
-      .populate('_user')
+  index: (req,res) => {
+    var params = req.params.id ? {_topic: req.params.id} : {}
+    Idea.find(params)
+      .populate('_user _topic')
       .exec( sendResults(res)) },
   show:  (req,res) => { 
     Idea.findById(req.params.id, sendResults(res)) 
