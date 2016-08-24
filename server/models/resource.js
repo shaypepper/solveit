@@ -16,8 +16,9 @@ var Resource = mongoose.model('Resource', new Schema({
     validate: validators.isURL,
     required: [true, 'Please provide a url for your resource'] 
   }, 
+  type: String,
   title:         reqField(String, 'Please provide a title for your resource'),
-  categories:   [refTo('Category')],
+  topics:       [refTo('Topic')],
   votes:        [refTo('Vote')]
 }, { discriminatorKey: 'kind', timestamps: true }))
 
