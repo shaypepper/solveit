@@ -38,7 +38,8 @@ module.exports = {
   },
   update: (req,res) => {
     
-  }
+  },
+  destroy: (req,res) => {}
 
   // delete: (req,res) => { 
   //   Topic.remove({_id: req.params.id, _user: req.session._id}, 
