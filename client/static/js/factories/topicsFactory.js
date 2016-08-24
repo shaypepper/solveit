@@ -25,4 +25,4 @@ app.factory('topicsFactory', ['$http','$cookies', function($http, $cookies) {
         .then(checkAndRun(callback)) 
     }
   }
-} 
+}])

@@ -6,8 +6,12 @@ app.config(function ($routeProvider) {
       controller: 'indexController'
     })
     .when('/login', {
-      templateUrl: '/partials/login.html',
+      templateUrl: '/partials/users/login.html',
       controller: 'loginController'
+    })
+    .when('/topics/new', {
+      templateUrl: '/partials/topics/new.html',
+      controller: 'topicsNewController'
     })
     .otherwise({
       redirectTo: '/'
