@@ -5,6 +5,14 @@ app.config(function ($routeProvider) {
       templateUrl: '/partials/index.html',
       controller: 'indexController'
     })
+    .when('/topics', {
+      templateUrl: '/partials/topics/index.html',
+      controller: 'topicsIndexController'
+    })
+    .when('/topics/:id', {
+      templateUrl: '/partials/topics/show.html',
+      controller: 'topicsShowController'
+    })
     .when('/login', {
       templateUrl: '/partials/users/login.html',
       controller: 'loginController'

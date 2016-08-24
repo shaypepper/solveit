@@ -1,7 +1,7 @@
 console.log('Topics Factory')
 app.factory('topicsFactory', ['$http','$cookies', function($http, $cookies) {
   function checkAndRun(callback) {
-    return data => { if (typeof(callback) == 'function') callback(data.data); }
+    return (data => { if (typeof(callback) == 'function') callback(data.data); })
   }
   return {
     index:  (callback) => {
@@ -25,4 +25,4 @@ app.factory('topicsFactory', ['$http','$cookies', function($http, $cookies) {
         .then(checkAndRun(callback)) 
     }
   }
-}])
+}]) 
