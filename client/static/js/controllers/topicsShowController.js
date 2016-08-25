@@ -1,6 +1,6 @@
 app.controller('topicsShowController', 
-  ['$scope','topicsFactory','ideasFactory','usersFactory','$location','$cookies','$routeParams',
-  function($scope, topicsFactory, ideasFactory, usersFactory, $location, $cookies, $routeParams) {
+  ['$scope','topicsFactory','ideasFactory','usersFactory','responsesFactory','$location','$cookies','$routeParams',
+  function($scope, topicsFactory, ideasFactory, usersFactory,responsesFactory, $location, $cookies, $routeParams) {
     usersFactory.session($location, $scope);
     function getTopic(){
       topicsFactory.show($routeParams.id, (topic)=>{
@@ -17,11 +17,12 @@ app.controller('topicsShowController',
           $scope.ideas = data
         }
       })
+      $scope.showNewIdea = false;
     }
 
     getIdeas()
     getTopic()
-    $scope.showNewIdea = false;
+    $scope.response = []
 
     $scope.createIdea = () => {
       var idea = { text: $scope.idea.text, _user: $scope.userId } 
@@ -29,17 +30,39 @@ app.controller('topicsShowController',
         if (data && "errors" in data) {
           $scope.errors = data.errors
         } else {
+          $scope.idea = {}
           getIdeas()
         }
       })
     }
 
-    $scope.toggleShow = (ideaIndex) => {
-      if (!("show" in $scope.ideas[ideaIndex])) {
-        $scope.ideas[ideaIndex].show = true;
+    $scope.toggleResponses = (ideaIndex) => {
+      if (!("showResponses" in $scope.ideas[ideaIndex])) {
+        $scope.ideas[ideaIndex].showResponses = true;
       } else {
-        delete $scope.ideas[ideaIndex].show;
+        delete $scope.ideas[ideaIndex].showResponses;
       }
+    }
+    $scope.toggleResponseForm = (ideaIndex) => {
+      if (!("showResponseForm" in $scope.ideas[ideaIndex])) {
+        $scope.ideas[ideaIndex].showResponseForm = true;
+      } else {
+        delete $scope.ideas[ideaIndex].showResponseForm;
+      }
+    }
+
+    $scope.createResponse = (ideaIndex) => {
+      responsesFactory.createByIdeaId($scope.ideas[ideaIndex]._id,
+        {text: $scope.response[ideaIndex].text, agree: $scope.response[ideaIndex].agree},
+        data => {
+          if (data && "errors" in data) {
+            console.log(data.errors)
+            $scope.errors = data.errors
+          } else {
+            getIdeas()
+          }
+        }
+      )
     }
   }
 ]);

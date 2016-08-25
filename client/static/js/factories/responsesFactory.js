@@ -9,12 +9,16 @@ app.factory('responsesFactory', ['$http', function($http, $cookies){
       $http.get('/responses')
         .then(checkAndRun(callback))
     },
-    create: (responses, callback) => {
-      $http.post('/responses', responses)
+    create: (response, callback) => {
+      $http.post('/responses', response)
         .then(checkAndRun(callback))
     },
-    update: (responses, callback) => {
-      $http.put('/responses/'+responses._id, responses)
+    createByIdeaId: (ideaID, response, callback) => {
+      $http.post('/ideas/'+ideaID+'/responses', response)
+        .then(checkAndRun(callback))
+    },
+    update: (response, callback) => {
+      $http.put('/responses/'+responses._id, response)
         .then(checkAndRun(callback))
     },
     show: (responseID, callback) => {

@@ -6,40 +6,67 @@
     <p>{{ topic.description }}</p>
   </div>
   <p>
-    <button ng-click="showNewIdea = !showNewIdea" class="w3-btn">New Idea</button>
+    <button ng-click="showNewIdea = !showNewIdea" class="w3-btn"> + New Idea</button>
     <a class="w3-btn" href="/#/topics">All Topics</a>
     <a class="w3-btn" href="#">Resources</a>
     <a class="w3-btn" href="#">Videos</a>
   </p>
 </div>
 <div>
-  <div ng-show="showNewIdea" class="w3-card-2 w3-container w3-section w3-leftbar w3-border-amber">
+  <section ng-show="showNewIdea" class="w3-card-2 w3-container w3-section w3-leftbar w3-border-amber">
     <h3>New Idea</h3>
     <form ng-submit="createIdea()" class="w3-form">
       <textarea ng-model="idea.text" name="text" class="w3-input"></textarea>
       <input class="w3-btn w3-right" type="submit">
     </form>
-  </div>
-  <div class="w3-card-2 w3-container w3-section w3-leftbar w3-border-cyan" ng-repeat="idea in ideas">
+  </section>
+  <section class="w3-card-2 w3-container w3-section w3-leftbar w3-border-cyan" ng-repeat="idea in ideas">
     <div class="w3-row">
       <div class="w3-col m9">
-        <h3>{{ idea.text }} 
-          <a class="w3-tiny w3-btn" href="/#/ideas/{{idea._id}}">More</a>
-          <button class="w3-tiny w3-btn" ng-click="toggleShow($index)">Responses</button>
-        </h3>
+        <p><span class="w3-tag w3-cyan">IDEA</span> from {{ idea._user.name }}</p>
+        <p>{{ idea.text }} </p>
+        <p>
+          <a class="w3-small w3-btn" href="/#/ideas/{{idea._id}}">More</a>
+          <button class="w3-small w3-btn" ng-click="toggleResponses($index)">Responses</button>
+          <button class="w3-small w3-btn" ng-click="toggleResponseForm($index)">+ Respond</button>
+        </p>
       </div>
       <div class="w3-col m3">
         <ul class="w3-ul w3-right">
-          <li>Agrees    <span class="w3-tag w3-indigo">54</span>   </li>
-          <li>Disagrees <span class="w3-tag w3-pink">34</span>     </li>
-          <li>Responses <span class="w3-tag w3-blue-grey">23</span></li>
+          <li>Agrees    <span class="w3-tag w3-tiny w3-indigo">54</span>   </li>
+          <li>Disagrees <span class="w3-tag w3-tiny w3-pink">34</span>     </li>
+          <li>Responses <span class="w3-tag w3-tiny w3-blue-grey">23</span></li>
         </ul>
       </div>
-    </div>
-    <div ng-show="ideas[$index].show" class="w3-row">
-      <p>HEY!</p>
-    </div>
-  </div>
+    </div><!-- .w3-row -->
+    <div ng-show="idea.showResponses" class="w3-row">
+      <ul class="w3-ul w3-half w3-pale-blue">
+        <li>I totally agree!</li>
+        <li>I totally agree!</li>
+        <li>I totally agree!</li>
+      </ul>
+      <ul class="w3-ul w3-half w3-light-grey">
+        <li>I totally disagree!</li>
+        <li>I totally disagree!</li>
+        <li>I totally disagree!</li>
+      </ul>
+    </div><!-- .w3-row -->
+    <div ng-show="idea.showResponseForm" class="w3-row">
+      <form ng-submit="createResponse($index)" class="w3-form w3-row-padding">
+
+        <div class="w3-col m7">
+          <input ng-model="response[$index].text" name="text" class="w3-input">
+        </div>
+        <div class="w3-col m3">
+          <input class="w3-check" type="checkbox" checked="checked" ng-model="response[$index].agree" name="agree">
+          <label class="w3-validate">Agree?</label>
+        </div>
+        <div class="w3-col m2">
+          <input class="w3-btn w3-right" type="submit">
+        </div>
+      </form>      
+    </div><!-- .w3-row -->
+  </section><!-- .w3-section -->
 
 </div>
 

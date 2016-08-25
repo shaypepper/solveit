@@ -23,8 +23,12 @@ module.exports = {
   index: (req,res) => {
     var params = req.params.id ? {_topic: req.params.id} : {}
     Idea.find(params)
-      .populate('_user _topic')
-      .exec( sendResults(res)) },
+      .populate('_user _topic responses votes')
+      .exec( 
+        sendResults(res)
+
+      ) 
+  },
   show:  (req,res) => { 
     Idea.findById(req.params.id, sendResults(res)) 
   },

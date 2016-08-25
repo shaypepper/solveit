@@ -28,7 +28,9 @@ mongoose.model('Response', new Schema({
   agree:      { type: Boolean, default: true},
   comments:   [refTo('Comment')],
   votes:      [refTo('Vote')],
-  resources:  [refTo('Resource')]
+  resources:  [refTo('Resource')],
+  _idea:       refTo('Idea'),
+  _user:       refTo('User'),
 }, TS))
 
 mongoose.model('Idea', new Schema({
