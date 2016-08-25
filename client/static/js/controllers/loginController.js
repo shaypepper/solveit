@@ -12,5 +12,6 @@ app.controller('loginController',
         else $location.url('/topics')
       })
     }
+    $scope.navlogin = true
   }
 ]);

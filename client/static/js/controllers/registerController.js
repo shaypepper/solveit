@@ -16,5 +16,6 @@ app.controller('registerController',
         }
       })
     }
+    $scope.navlogin = false
   }
 ]);
