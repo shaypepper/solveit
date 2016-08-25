@@ -70,8 +70,16 @@ app.controller('topicsShowController',
       )
     }
 
-    $scope.voteUp = (type, post_id) => {
-      votesFactory.create({type: type, post_id: post_id})
+    $scope.vote = (type, post_id, vote) => {
+      votesFactory.create({type: type, post_id: post_id, up: vote},         data => {
+          if (data && "errors" in data) {
+            console.log(data.errors)
+            $scope.errors = data.errors
+          } else {
+            getIdeas()
+          }
+        }
+      )
     }
   }
 ]);

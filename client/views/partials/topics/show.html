@@ -33,21 +33,21 @@
       </p>
     </div>
     <div class="w3-col m1 w3-container">
-      <ul class="w3-center w3-ul w3-tiny">
-        <li>
+      <div class="w3-center w3-ul w3-tiny">
+        <p>
           <a class="w3-text-indigo">
-            <i class="fa fa-2x fa-chevron-circle-up"></i>
+            <i ng-click="vote('idea', idea._id, true)" class="fa fa-2x fa-chevron-circle-up"></i>
           </a>
-        </li>
-        <li class="w3-tiny">20</li>
-        <li class="w3-tiny">52</li>
-        <li>
+        </p>
+        <p class="w3-tiny">20</p>
+        <p class="w3-tiny">52</p>
+        <p>
           <a class="w3-text-pink">
-            <i class="fa fa-2x fa-chevron-circle-down"></i>
+            <i ng-click="vote('idea', idea._id, false)" class="fa fa-2x fa-chevron-circle-down"></i>
           </a>
-        </li>
+        </p>
 
-      </ul>
+      </div>
     </div>
   </div><!-- .w3-row -->
 
