@@ -8,6 +8,5 @@ app.controller('topicsNewController',
     		$scope.topic = topic;
     	});
 	}
-  	$scope.topic = {}
   }
 ]);
