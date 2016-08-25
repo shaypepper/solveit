@@ -12,27 +12,23 @@ function sendError(res, cat, err) {
 }
 function setSession(req, res, result) {
   req.session._id = result._id;
-  req.session.name = result.name;
+  req.session.first_name = result.first_name;
   res.json(result);
 }
 
 module.exports = {
   login: (req, res) => {
-    User.findOne({name: req.body.name}, (err, result) => {
+    User.findOne({username: req.body.username}, (err, result) => {
       if (err) { 
         res.json(err); return; 
-      } else if (result) {
-        setSession(req, res, result);
-      } else {
-        var new_user = new User({name: req.body.name});
-        new_user.save((err, result) => {
-          console.log(result, err)
-          if (!result || !result.errors) {
-            setSession(req, res, result);
-          } else {
-            res.json(result)
-          }
-        })
+      } 
+      else if (result) {
+        if (req.body.password == result.password){
+          setSession(req, res, result);
+        }
+        else{
+          sendError(res, "login", "Invalid Username or Password")
+        }
       }
     })
   },
@@ -45,6 +41,24 @@ module.exports = {
     User.findByIdAndRemove(req.params.id, 
       sendResults(res)
     ) 
+  },
+  register: (req,res) => {
+    var new_user = new User({
+      username: req.body.username,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      email: req.body.email,
+      password: req.body.password
+    });
+    new_user.save((err, result) => {
+      if (err){
+        console.log(err)
+        res.json(err);
+      }
+      else{
+        setSession(req, res, result)
+      }
+    })
   }
 }
 

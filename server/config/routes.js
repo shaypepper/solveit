@@ -32,7 +32,7 @@ module.exports = function(app){
   app.post('/login', users.login);    // login
   app.get('/logout', users.logout);   // logout
   app.get('/session', users.session); // retrieve session info
-
+  app.post('/register', users.register); // register
   // votes
   app.post('/votes', votes.create)
   app.get('/votes', votes.index)

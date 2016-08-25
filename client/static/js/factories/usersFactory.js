@@ -11,15 +11,22 @@ app.factory('usersFactory', ['$http','$cookies', function($http, $cookies) {
       $http.get('/logout')
         .then(checkAndRun(callback))
     },
+    register: (user, callback) => {
+      $http.post('/register', user)
+        .then(checkAndRun(callback))
+    },
     session: ($location, $scope) => {
       $http.get('/session')
         .then(data => {
           var session = data.data;
           $scope.session = session;
+          $scope.logout = () => {
+            $http.get('/logout')
+          }
           if (!('_id' in session)) {
             $location.url('/login');
           } else {
-            $scope.userName = session.name;
+            $scope.userName = session.first_name;
             $scope.userId = session._id;
           }
         })
