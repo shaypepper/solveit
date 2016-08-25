@@ -22,7 +22,7 @@
   </section>
   <section class="w3-card-2 w3-container w3-section w3-leftbar w3-border-cyan" ng-repeat="idea in ideas">
     <div class="w3-row">
-      <div class="w3-col m9">
+      <div class="w3-col m11">
         <p><span class="w3-tag w3-cyan">IDEA</span> from {{ idea._user.name }}</p>
         <p>{{ idea.text }} </p>
         <p>
@@ -31,24 +31,30 @@
           <button class="w3-small w3-btn" ng-click="toggleResponseForm($index)">+ Respond</button>
         </p>
       </div>
-      <div class="w3-col m3">
-        <ul class="w3-ul w3-right">
-          <li>Agrees    <span class="w3-tag w3-tiny w3-indigo">54</span>   </li>
-          <li>Disagrees <span class="w3-tag w3-tiny w3-pink">34</span>     </li>
-          <li>Responses <span class="w3-tag w3-tiny w3-blue-grey">23</span></li>
+      <div class="w3-col m1 w3-container">
+        <ul class="w3-center w3-ul w3-tiny">
+          <li>
+            <a class="w3-text-indigo">
+              <i class="fa fa-2x fa-chevron-circle-up"></i>
+            </a>
+          </li>
+          <li class="w3-tiny">20</li>
+          <li class="w3-tiny">52</li>
+          <li>
+            <a class="w3-text-pink">
+              <i class="fa fa-2x fa-chevron-circle-down"></i>
+            </a>
+          </li>
+
         </ul>
       </div>
     </div><!-- .w3-row -->
     <div ng-show="idea.showResponses" class="w3-row">
       <ul class="w3-ul w3-half w3-pale-blue">
-        <li>I totally agree!</li>
-        <li>I totally agree!</li>
-        <li>I totally agree!</li>
+        <li ng-repeat="response in idea.agree_responses">{{ response.text }}</li>
       </ul>
       <ul class="w3-ul w3-half w3-light-grey">
-        <li>I totally disagree!</li>
-        <li>I totally disagree!</li>
-        <li>I totally disagree!</li>
+        <li ng-repeat="response in idea.disagree_responses">{{ response.text }}</li>
       </ul>
     </div><!-- .w3-row -->
     <div ng-show="idea.showResponseForm" class="w3-row">

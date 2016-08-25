@@ -23,7 +23,8 @@ module.exports = {
   index: (req,res) => {
     var params = req.params.id ? {_topic: req.params.id} : {}
     Idea.find(params)
-      .populate('_user _topic responses votes')
+      .populate('_user _topic votes')
+      .populate({path: 'responses', options: {limit: 20} })
       .exec( 
         sendResults(res)
 
