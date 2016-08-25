@@ -1,8 +1,9 @@
 <div slv-navbar></div>
+<br>
 <div class="w3-text-light-green">
 <form ng-submit="login()" name="loginForm" class="w3-container">
-Username: <input class="w3-input" type="text" name="username" ng-model="user.username" autofocus/><br>
-Password: <input class="w3-input" type="password" name="password" ng-model="user.password"><br>
+<input class="w3-input w3-center" placeholder="Username" type="text" name="username" ng-model="user.username" autofocus/><br>
+<input class="w3-input w3-center" placeholder="password" type="password" name="password" ng-model="user.password"><br>
 <input class="w3-center w3-input w3-light-green" type="submit" value="login" required>
 <p ng-repeat="err in errors" class="text-danger">{{err.message}}</p>
 </form>

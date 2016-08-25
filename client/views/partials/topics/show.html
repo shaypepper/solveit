@@ -24,7 +24,8 @@
 <section class="w3-card-2 w3-container w3-section w3-leftbar w3-border-cyan" ng-repeat="idea in ideas">
   <div class="w3-row">
     <div class="w3-col m11">
-      <p><span class="w3-tag w3-cyan">IDEA</span> from {{ idea._user.name }}</p>
+      <p><span class="w3-tag w3-cyan">IDEA</span> 
+      {{ idea._user.name }}</p>
       <p>{{ idea.text }} </p>
       <p>
         <a class="w3-small w3-btn" href="/#/ideas/{{idea._id}}">More</a>
