@@ -1,3 +1,47 @@
-<h3>{{ topic.title }}</h3>
-<p>{{ topic.description }}</p>
-<a href="/#/topics">Back to all topics</a>
+<div slv-navbar></div>
+
+<div class="w3-card-2 w3-section w3-light-green w3-container w3-leftbar w3-border-black">
+  <div>
+    <h1>{{ topic.title }}</h1>
+    <p>{{ topic.description }}</p>
+  </div>
+  <p>
+    <button ng-click="showNewIdea = !showNewIdea" class="w3-btn">New Idea</button>
+    <a class="w3-btn" href="/#/topics">All Topics</a>
+    <a class="w3-btn" href="#">Resources</a>
+    <a class="w3-btn" href="#">Videos</a>
+  </p>
+</div>
+<div>
+  <div ng-show="showNewIdea" class="w3-card-2 w3-container w3-section w3-leftbar w3-border-amber">
+    <h3>New Idea</h3>
+    <form ng-submit="createIdea()" class="w3-form">
+      <textarea ng-model="idea.text" name="text" class="w3-input"></textarea>
+      <input class="w3-btn w3-right" type="submit">
+    </form>
+  </div>
+  <div class="w3-card-2 w3-container w3-section w3-leftbar w3-border-cyan" ng-repeat="idea in ideas">
+    <div class="w3-row">
+      <div class="w3-col m9">
+        <h3>{{ idea.text }} 
+          <a class="w3-tiny w3-btn" href="/#/ideas/{{idea._id}}">More</a>
+          <button class="w3-tiny w3-btn" ng-click="toggleShow($index)">Responses</button>
+        </h3>
+      </div>
+      <div class="w3-col m3">
+        <ul class="w3-ul w3-right">
+          <li>Agrees    <span class="w3-tag w3-indigo">54</span>   </li>
+          <li>Disagrees <span class="w3-tag w3-pink">34</span>     </li>
+          <li>Responses <span class="w3-tag w3-blue-grey">23</span></li>
+        </ul>
+      </div>
+    </div>
+    <div ng-show="ideas[$index].show" class="w3-row">
+      <p>HEY!</p>
+    </div>
+  </div>
+
+</div>
+
+
+
