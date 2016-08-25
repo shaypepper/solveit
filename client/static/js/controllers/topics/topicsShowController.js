@@ -36,25 +36,42 @@ app.controller('topicsShowController',
       })
     }
 
-    $scope.toggleResponses = (ideaIndex) => {
-      if (!("showResponses" in $scope.ideas[ideaIndex])) {
-        $scope.ideas[ideaIndex].showResponses = true;
+    $scope.toggleResponses = (idea) => {
+      if (!("showResponses" in idea)) {
+        idea.showResponses = true;
+        console.log(idea.responses)
+        idea.agree_responses = idea.responses.filter(response => response.agree).splice(0,10)
+        idea.disagree_responses = idea.responses.filter(response => !response.agree).splice(0,10)
       } else {
-        delete $scope.ideas[ideaIndex].showResponses;
+        delete idea.showResponses;
       }
-    }
-    $scope.toggleResponseForm = (ideaIndex) => {
-      if (!("showResponseForm" in $scope.ideas[ideaIndex])) {
-        $scope.ideas[ideaIndex].showResponseForm = true;
+    }    
+
+    $scope.toggleResponseForm = (idea) => {
+      if (!("showResponseForm" in idea)) {
+        idea.showResponseForm = true;
       } else {
-        delete $scope.ideas[ideaIndex].showResponseForm;
+        delete idea.showResponseForm;
       }
     }
 
-    $scope.createResponse = (ideaIndex) => {
-      responsesFactory.createByIdeaId($scope.ideas[ideaIndex]._id,
-        {text: $scope.response[ideaIndex].text, agree: $scope.response[ideaIndex].agree},
+    $scope.createResponse = (idea, response) => {
+      response.agree = "agree" in response && response.agree === true ? true : false
+      responsesFactory.createByIdeaId(idea._id,
+        {text: response.text, agree: response.agree},
         data => {
+          if (data && "errors" in data) {
+            console.log(data.errors)
+            $scope.errors = data.errors
+          } else {
+            getIdeas()
+          }
+        }
+      )
+    }
+
+    $scope.vote = (type, post_id, vote) => {
+      votesFactory.create({type: type, post_id: post_id, up: vote},         data => {
           if (data && "errors" in data) {
             console.log(data.errors)
             $scope.errors = data.errors

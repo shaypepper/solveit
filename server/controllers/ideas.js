@@ -27,7 +27,6 @@ module.exports = {
       .populate({path: 'responses', options: {limit: 20} })
       .exec( 
         sendResults(res)
-
       ) 
   },
   show:  (req,res) => { 
