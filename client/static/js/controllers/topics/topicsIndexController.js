@@ -10,5 +10,15 @@ app.controller('topicsIndexController',
       })
     }
     getTopics()
+     $scope.addTopic = () => {
+      topicsFactory.create($scope.newTopic, (data) => {
+        if ("errors" in data) {
+          $scope.errors = data.errors
+        } else {
+          $scope.newTopic = {};
+          getTopics()
+        }
+      });
+  }
   }
 ]);
