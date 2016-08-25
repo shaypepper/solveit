@@ -3,7 +3,7 @@
     <h3>solve.it</h3>
   </li>
   <li class="w3-right" ng-if="userId"> 
-    <a class="w3-hover-text-blue w3-hover-none" href="/#/logout">Logout</a>
+    <a class="w3-hover-text-blue w3-hover-none" ng-click="logout()" href="/#/login">Logout</a>
   </li>
   <li class="w3-right w3-navitem w3-text-yellow" ng-if="userId"> 
     Hello, {{ userName }}!

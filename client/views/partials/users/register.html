@@ -1,0 +1,10 @@
+<h1>Register</h1>
+<form ng-submit="register()" name="loginForm">
+Username: <input type="text" name="username" ng-model="user.username" autofocus/><br>
+First Name: <input type="text" name="first_name" ng-model="user.first_name"><br>
+Last Name: <input type="text" name="last_name" ng-model="user.last_name"><br>
+Email: <input type="email" name="email" ng-model="user.email"><br>
+Password: <input type="password" name="password" ng-model="user.password"><br>
+<input type="submit" class="btn btn-xs btn-primary" value="log in!" required>
+<p ng-repeat="err in errors" class="text-danger">{{err.message}}</p>
+</form>
