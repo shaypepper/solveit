@@ -38,9 +38,9 @@ module.exports = {
     response._idea = req.params.id;
     response.save((err, response) => {
       if (err) { res.json(err); return; }
-      Response.findByIdAndUpdate(
+      Idea.findByIdAndUpdate(
         req.params.id, 
-        {$push: {ideas: response._id}},
+        {$push: {responses: response._id}},
         (err, topic) => { 
           User.findByIdAndUpdate(
             req.params._id, 
