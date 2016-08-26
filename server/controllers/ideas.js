@@ -30,8 +30,9 @@ module.exports = {
       .exec( function(err, result) {
         if (err) { res.json(err); return; }
         var returnedObj = { ideas: result }
+        var idea_ids = result.map(idea => idea._id )
         Vote.aggregate([
-          { $match: { "kind": "IdeaVote" } }, 
+          { $match: { "kind": "IdeaVote", "_idea": {$in: idea_ids} } }, 
           { $group: {
               _id: {up: '$up', idea: '$_idea'}, 
               count: { $sum: 1} 

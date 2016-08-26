@@ -18,22 +18,23 @@ app.controller('topicsShowController',
           $scope.ideas = data.ideas
           votes = {}
           data.votes.forEach((voteTally, index) => {
-            votes[voteTally._id.idea] = {};
+            if (!(voteTally._id.idea in votes)) votes[voteTally._id.idea] = {};
             if (voteTally._id.up) {
               votes[voteTally._id.idea].up = voteTally.count
             } else {
               votes[voteTally._id.idea].down = voteTally.count
             }
           })
-          for (x in votes) {
+          for (idea in data.ideas) {
+            let x = data.ideas[idea]._id
+            if (!(x in votes)) votes[x] = {up: 0, down: 0} 
             if (!('up' in votes[x])) votes[x].up = 0;
             if (!('down' in votes[x])) votes[x].down = 0;
-          }       
+          }
           $scope.votes = votes;
         }
       })
       $scope.showNewIdea = false;
-
     }
 
     getIdeas()
@@ -77,7 +78,6 @@ app.controller('topicsShowController',
         {text: response.text, agree: response.agree},
         data => {
           if (data && "errors" in data) {
-            console.log(data.errors)
             $scope.errors = data.errors
           } else {
             getIdeas()
@@ -89,7 +89,6 @@ app.controller('topicsShowController',
     $scope.vote = (type, post_id, vote) => {
       votesFactory.create({type: type, post_id: post_id, up: vote},         data => {
           if (data && "errors" in data) {
-            console.log(data.errors)
             $scope.errors = data.errors
           } else {
             getIdeas()
