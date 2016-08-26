@@ -18,7 +18,7 @@ var Resource = mongoose.model('Resource', new Schema({
   }, 
   type: String,
   title:         reqField(String, 'Please provide a title for your resource'),
-  topics:       [refTo('Topic')],
+  _topic:       refTo('Topic'),
   votes:        [refTo('Vote')]
 }, { discriminatorKey: 'kind', timestamps: true }))
 

@@ -50,9 +50,10 @@ module.exports = {
     var [Post, PostResource] = [mongoose.model(post_type), resourceTypes[post_type_l]];
 
     var resourceData = { 
-      _user: req.session._id,
-      url:   req.body.url,
-      title: req.body.title
+      _user:  req.session._id,
+      url:    req.body.url,
+      title:  req.body.title,
+      _topic: req.params.id
     };
     resourceData['_'+post_type_l] = req.body.post_id;
     var newResource = new PostResource(resourceData);
@@ -61,10 +62,16 @@ module.exports = {
         req.body.post_id,
         { $push: { resources: resource } },
         checkForErrors(req,res,(err,result)=>{
-          User.findByIdAndUpdate(
-            req.session._id,
-            {$push: {resources: newResource}},
-            (err, result) => { sendResults(res)(err, newResource) }
+          Topic.findByIdAndUpdate(
+            req.params.id,
+            { $push: { resources: resource } },
+            checkForErrors(req,res,(err,result)=>{
+              User.findByIdAndUpdate(
+                req.session._id,
+                {$push: {resources: newResource}},
+                (err, result) => { sendResults(res)(err, newResource) }
+              )
+            })
           )
         })
       )
