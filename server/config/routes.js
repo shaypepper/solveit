@@ -26,6 +26,7 @@ module.exports = function(app){
   app.post('/ideas/:id/responses', responses.create);      // post idea on topic
   app.get('/ideas/:id/responses', responses.index); 
 
+  app.get('/topics/:id/resources', resources.findAllByTopic)
 
   // app.post('/topics/:topic_id/:option_id', topics.up_vote);
 

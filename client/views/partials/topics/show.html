@@ -23,9 +23,8 @@
 
 <section class="w3-card-2 w3-container w3-section w3-leftbar w3-border-cyan" ng-repeat="idea in ideas">
   <div class="w3-row">
-    <div class="w3-col m11">
-      <p><span class="w3-tag w3-cyan">IDEA</span> 
-      {{ idea._user.name }}</p>
+    <div class="w3-col m11 w3-container">
+      <p><span class="w3-tag w3-cyan">IDEA</span> from {{ idea._user.username }}</p>
       <p>{{ idea.text }} </p>
       <p>
         <a class="w3-small w3-btn" href="/#/ideas/{{idea._id}}">More</a>
@@ -35,15 +34,15 @@
     </div>
     <div class="w3-col m1 w3-container">
       <div class="w3-center w3-ul w3-tiny">
-        <p>
-          <a class="w3-text-indigo">
+        <p class="vote-btn">
+          <a>
             <i ng-click="vote('idea', idea._id, true)" class="fa fa-2x fa-chevron-circle-up"></i>
           </a>
         </p>
         <p class="w3-tiny">{{ votes[idea._id].up }}</p>
         <p class="w3-tiny">{{ votes[idea._id].down }}</p>
-        <p>
-          <a class="w3-text-pink">
+        <p class="vote-btn">
+          <a>
             <i ng-click="vote('idea', idea._id, false)" class="fa fa-2x fa-chevron-circle-down"></i>
           </a>
         </p>
