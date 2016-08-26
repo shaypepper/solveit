@@ -1,10 +1,6 @@
 var app = angular.module('app', ['ngRoute', 'ngMessages', 'ngCookies']);
 app.config(function ($routeProvider) {
   $routeProvider
-    .when('/', {
-      templateUrl: '/partials/index.html',
-      controller: 'indexController'
-    })
     .when('/topics', {
       templateUrl: '/partials/topics/index.html',
       controller: 'topicsIndexController'
@@ -25,7 +21,11 @@ app.config(function ($routeProvider) {
       templateUrl: '/partials/users/register.html',
       controller: 'registerController'
     })
+    .when('/resources',{
+      templateUrl: '/partials/resources/index.html',
+      controller: 'resourcesController'
+    })
     .otherwise({
-      redirectTo: '/'
+      redirectTo: '/topics'
     });
 });

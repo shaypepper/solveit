@@ -3,7 +3,6 @@ app.controller('topicsShowController',
   function($scope, topicsFactory, ideasFactory, usersFactory, votesFactory, responsesFactory,resourcesFactory, $location, $cookies, $routeParams) {
     usersFactory.session($location, $scope);
     function getTopic(){
-
       topicsFactory.show($routeParams.id, (topic)=>{
         $scope.topic = topic;
         $scope.pageTitle = $scope.topic.title

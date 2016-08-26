@@ -1,0 +1,23 @@
+<div slv-navbar></div>
+
+<div class="w3-card-2 w3-section w3-light-green w3-container w3-leftbar w3-border-black">
+  <div>
+    <h1>{{ topic.title }}</h1>
+    <p>{{ topic.description }}</p>
+  </div>
+  <p>
+    <button ng-click="showNewResource = !showNewResource" class="w3-btn"> + New Resource</button>
+    <a class="w3-btn" href="/#/topics">All Topics</a>
+  </p>
+</div>
+<section ng-show="showNewResource" class="w3-card-2 w3-container w3-section w3-leftbar w3-border-deep-purple">
+  <h3>New Resource</h3>
+  <form ng-submit="createResource()" class="w3-form">
+    <input ng-model="resource.title" name="text" class="w3-input w3-center" placeholder="Title"></input>
+    <textarea ng-model="resource.url" name="text" class="w3-input w3-center" placeholder="URL"></textarea>
+    <input class="w3-btn w3-right" type="submit">
+  </form>
+</section>
+  <slv-resources ng-repeat="resource in resources" resource="{{ resource }}"></slv-resources>
+
+
