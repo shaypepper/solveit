@@ -1,6 +1,7 @@
 var mongoose = require('mongoose')
 var User = mongoose.model('User')
 var Resource = mongoose.model('Resource')
+var Topic = mongoose.model('Topic')
 var resourceTypes = require('../models/resource.js')
 
 function sendResults(res) {
@@ -33,10 +34,11 @@ module.exports = {
     Resource.find({ _topic: req.params.id }).exec(sendResults(res))
   },
   create: (req,res) => {
+    console.log(req.body)
     if (
-      !checkField('user', req.session._id ) ||
-      !checkField('type', req.body.type)    ||
-      !checkField('Element post_id', req.body.post_id)
+      !checkField(req,res,'user', req.session._id ) ||
+      !checkField(req,res,'type', req.body.type)    ||
+      (req.body.type != "topic" && !checkField(req,res,'Element post_id', req.body.post_id))
     ) { return; }
 
     var post_type_l =  req.body.type.toLowerCase() 
@@ -55,7 +57,7 @@ module.exports = {
       title:  req.body.title,
       _topic: req.params.id
     };
-    resourceData['_'+post_type_l] = req.body.post_id;
+    if (post_type_l !== "topic") resourceData['_'+post_type_l] = req.body.post_id;
     var newResource = new PostResource(resourceData);
     newResource.save(checkForErrors(req,res,(err,resource)=>{
       Post.findByIdAndUpdate(

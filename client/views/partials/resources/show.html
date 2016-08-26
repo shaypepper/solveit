@@ -1,9 +1,15 @@
-<div class="w3-card w3-container w3-section w3-leftbar w3-border-deep-purple">
-<p><span class="w3-tag w3-deep-purple">Resource</span> </p>
-  <img ng-src="{{resource.thumbnail_url}}"/>
+<div class="w3-card-2 w3-leftbar w3-border-deep-purple">
+  <img style="width: 100%" ng-src="{{resource.thumbnail_url}}"/>
   <div class="w3-container">
-    <p><a ng-href="{{resource.url}}"><b>{{resource.title}}</b></a></p>
-    <p>{{resource.description}}</p>
-    <p class="w3-text-grey"></p>
+    <div class="w3-row">
+      <p>
+        <span class="w3-tag w3-deep-purple">RESOURCE</span>
+        <b>{{resource.title}}</b>
+      </p>
+      <p>{{resource.description}}</p>
+      <p class="w3-text-grey">
+        <a ng-href="{{resource.url}}">{{resource.provider_url}}</a>
+      </p>
+    </div>
   </div>
 </div>

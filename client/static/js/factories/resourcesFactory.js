@@ -10,8 +10,12 @@ app.factory('resourcesFactory', ['$http','$httpParamSerializer', function($http,
 			$http.get('/resources')
 				.then(checkAndRun(callback))
 		},
-		create: (resource, callback) => {
-			$http.post('/resources', resource)
+		findAllByTopic: (topicID, callback) => {
+			$http.get('/topics/'+topicID+'/resources')
+				.then(checkAndRun(callback))
+		},
+		create: (topicID, resource, callback) => {
+			$http.post('/topics/'+topicID+'/resources', resource)
 				.then(checkAndRun(callback))
 		},
 		update: (resource, callback) => {

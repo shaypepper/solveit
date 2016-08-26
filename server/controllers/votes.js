@@ -55,7 +55,6 @@ module.exports = {
     // look to see if user has voted for this idea, response, or comment before.
     var voteData = { _user: req.session._id }
     voteData['_' + post_type_l] = req.body.post_id
-    console.log(voteData)
 
     PostVote
       .findOne(voteData)

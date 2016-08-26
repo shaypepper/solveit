@@ -8,16 +8,19 @@
   <p>
     <button ng-click="showNewResource = !showNewResource" class="w3-btn"> + New Resource</button>
     <a class="w3-btn" href="/#/topics">All Topics</a>
+    <a class="w3-btn" href="/#/topics/{{topic._id}}">Back to Topic</a>
   </p>
 </div>
-<section ng-show="showNewResource" class="w3-card-2 w3-container w3-section w3-leftbar w3-border-deep-purple">
+<section ng-show="showNewResource" class="w3-card-2 w3-container w3-section w3-leftbar w3-border-amber">
   <h3>New Resource</h3>
   <form ng-submit="createResource()" class="w3-form">
-    <input ng-model="resource.title" name="text" class="w3-input w3-center" placeholder="Title"></input>
-    <textarea ng-model="resource.url" name="text" class="w3-input w3-center" placeholder="URL"></textarea>
+    <input ng-model="newResource.type" type="hidden" name="type" value="topic">
+    <input ng-model="newResource.title" name="text" class="w3-input w3-center" placeholder="Title"></input>
+    <textarea ng-model="newResource.url" name="url" class="w3-input w3-center" placeholder="URL"></textarea>
     <input class="w3-btn w3-right" type="submit">
   </form>
 </section>
-  <slv-resources ng-repeat="resource in resources" resource="{{ resource }}"></slv-resources>
-
+<div class="w3-section" ng-repeat="resource in resources">
+  <slv-resource resource="resource"></slv-resource>
+</div>
 
