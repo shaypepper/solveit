@@ -29,6 +29,9 @@ module.exports = {
   index:  (req,res) => {
     Resource.find({}).exec(sendResults(res))
   },
+  findAllByTopic: (req, res) => {
+    Resource.find({ _topic: req.params.id }).exec(sendResults(res))
+  },
   create: (req,res) => {
     if (
       !checkField('user', req.session._id ) ||

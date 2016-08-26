@@ -34,15 +34,15 @@
     </div>
     <div class="w3-col m1 w3-container">
       <div class="w3-center w3-ul w3-tiny">
-        <p>
-          <a class="w3-text-indigo">
+        <p class="vote-btn">
+          <a>
             <i ng-click="vote('idea', idea._id, true)" class="fa fa-2x fa-chevron-circle-up"></i>
           </a>
         </p>
         <p class="w3-tiny">{{ votes[idea._id].up }}</p>
         <p class="w3-tiny">{{ votes[idea._id].down }}</p>
-        <p>
-          <a class="w3-text-pink">
+        <p class="vote-btn">
+          <a>
             <i ng-click="vote('idea', idea._id, false)" class="fa fa-2x fa-chevron-circle-down"></i>
           </a>
         </p>
