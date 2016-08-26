@@ -21,7 +21,7 @@ app.config(function ($routeProvider) {
       templateUrl: '/partials/users/register.html',
       controller: 'registerController'
     })
-    .when('/resources',{
+    .when('/topics/:id/resources',{
       templateUrl: '/partials/resources/index.html',
       controller: 'resourcesController'
     })
