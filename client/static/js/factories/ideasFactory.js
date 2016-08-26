@@ -1,31 +1,35 @@
 console.log('Ideas Factory');
 
 app.factory('ideasFactory', ['$http', function($http, $cookies){
-	function checkAndRun(callback){
-		return (data => { if (typeof(callback) == 'function') callback(data.data);})
-	}
+  function checkAndRun(callback){
+    return function(data){ 
+      if (typeof(callback) == 'function') {
+        callback(data.data);
+      }
+    }
+  }
 	return {
-		index: (callback) => {
+		index: function(callback){
 			$http.get('/ideas')
 				.then(checkAndRun(callback))
 		},
-		ideasByTopic: (topicID, callback) => {
+		ideasByTopic: function(topicID, callback){
 			$http.get('topics/'+topicID+'/ideas')
 				.then(checkAndRun(callback))
 		},
-		create: (topicID, idea, callback) => {
+		create: function(topicID, idea, callback){
 			$http.post('topics/'+topicID+'/ideas', idea)
 				.then(checkAndRun(callback))
 		},
-		update: (idea, callback) => {
+		update: function(idea, callback){
 			$http.put('/ideas/'+idea._id, idea)
 				.then(checkAndRun(callback))
 		},
-		show: (ideaID, callback) => {
+		show: function(ideaID, callback){
 			$http.get('/ideas/'+ideaID)
 				.then(checkAndRun(callback))
 		},
-		delete: (ideaID, callback) => {
+		delete: function(ideaID, callback){
 			$http.delete('/ideas/'+ideaID)
 				.then(checkAndRun(callback))
 		}

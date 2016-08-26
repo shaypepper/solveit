@@ -1,34 +1,32 @@
 app.controller('resourcesController', 
-  ['$scope','resourcesFactory', 'topicsFactory', 'usersFactory', '$location','$routeParams', '$cookies',
-  function($scope, resourcesFactory, topicsFactory, usersFactory, $location,$routeParams, $cookies) {
-  	usersFactory.session($location,$scope);
+  ['$scope','resourcesFactory', 'topicsFactory', 'usersFactory', '$location','$routeParams', 
+  function($scope, resourcesFactory, topicsFactory, usersFactory, $location, $routeParams) {
+  	usersFactory.session($location, $scope);
   	$scope.pageTitle = "Resources"
   	function getResources(){
-  		resourcesFactory.findAllByTopic($routeParams.id, (resources)=>{
-  			var urls = resources.map( obj => obj.url )
+  		resourcesFactory.findAllByTopic($routeParams.id, function(resources){
+  			var urls = resources.map( function(obj){ return obj.url } )
         resourcesFactory.embedly({
           urls: urls.slice(0,10).join(',')
-        }, data => {
+        }, function(data){
           $scope.resources = data;
-          console.log(data)
         })        
   		})
   	}
     function getTopic(){
-      topicsFactory.show($routeParams.id, (topic)=>{
-        $scope.topic = topic
+      topicsFactory.show($routeParams.id, function(topic){
+        $scope.topic = topic;
       })
     }
     getTopic()
   	getResources()
-  	$scope.createResource = () => {
+  	$scope.createResource = function(){
       var new_resource = { 
         title: $scope.newResource.title,
         url: $scope.newResource.url,
         type: "topic"
       }
-  		resourcesFactory.create($routeParams.id, new_resource, (data) =>{
-  			console.log(data)
+  		resourcesFactory.create($routeParams.id, new_resource, function(data){
         if ("errors" in data){
   				$scope.errors = data.errors
   			} else {

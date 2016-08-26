@@ -2,30 +2,34 @@ console.log('Responses Factory');
 
 app.factory('responsesFactory', ['$http', function($http, $cookies){
   function checkAndRun(callback){
-    return data => { if (typeof(callback) == 'function') callback(data.data);}
+    return function(data){ 
+      if (typeof(callback) == 'function') {
+        callback(data.data);
+      }
+    }
   }
   return {
-    index: (callback) => {
+    index: function(callback){
       $http.get('/responses')
         .then(checkAndRun(callback))
     },
-    create: (response, callback) => {
+    create: function(response, callback){
       $http.post('/responses', response)
         .then(checkAndRun(callback))
     },
-    createByIdeaId: (ideaID, response, callback) => {
+    createByIdeaId: function(ideaID, response, callback){
       $http.post('/ideas/'+ideaID+'/responses', response)
         .then(checkAndRun(callback))
     },
-    update: (response, callback) => {
+    update: function(response, callback){
       $http.put('/responses/'+responses._id, response)
         .then(checkAndRun(callback))
     },
-    show: (responseID, callback) => {
+    show: function(responseID, callback){
       $http.get('/responses/'+responseID)
         .then(checkAndRun(callback))
     },
-    delete: (responseID, callback) => {
+    delete: function(responseID, callback){
       $http.delete('/responses/'+responseID)
         .then(checkAndRun(callback))
     }

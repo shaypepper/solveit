@@ -19,10 +19,10 @@ function checkForErrors(req, res, callback) {
 }
 
 module.exports = {
-  index: (req,res) => { 
+  index: function(req,res){ 
     Vote.find({}).populate('_user').exec(sendResults(res)) 
   },
-  create:  (req,res) => {
+  create: function(req,res){
     // double check that all necessary pieces of information are available
     var checkField = (fieldName, location) => {
       if (location == null) {

@@ -1,26 +1,30 @@
 console.log('Topics Factory')
 app.factory('topicsFactory', ['$http','$cookies', function($http, $cookies) {
-  function checkAndRun(callback) {
-    return (data => { if (typeof(callback) == 'function') callback(data.data); })
+  function checkAndRun(callback){
+    return function(data){ 
+      if (typeof(callback) == 'function') {
+        callback(data.data);
+      }
+    }
   }
   return {
-    index:  (callback) => {
+    index:  function(callback){
       $http.get('/topics')
         .then(checkAndRun(callback))
     },
-    create: (topic, callback) => {
+    create: function(topic, callback){
       $http.post('/topics', topic)
         .then(checkAndRun(callback))
     },
-    update: (topic, callback) => {
+    update: function(topic, callback){
       $http.put('/topics/'+topic._id, topic)
         .then(checkAndRun(callback))
     },
-    show:   (topicID, callback) => {
+    show:   function(topicID, callback){
       $http.get('/topics/'+topicID)
         .then(checkAndRun(callback)) 
     },
-    delete: (topicID, callback) => {
+    delete: function(topicID, callback){
       $http.delete('/topics/'+topicID)
         .then(checkAndRun(callback)) 
     }

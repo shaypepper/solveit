@@ -1,26 +1,30 @@
 app.factory('usersFactory', ['$http','$cookies', function($http, $cookies) {
-  function checkAndRun(callback) {
-    return data => { if (typeof(callback) == 'function') callback(data.data); }
+  function checkAndRun(callback){
+    return function(data){ 
+      if (typeof(callback) == 'function') {
+        callback(data.data);
+      }
+    }
   }
   return {
-    login: (user, callback) => {
+    login: function(user, callback){
       $http.post('/login', user)
         .then(checkAndRun(callback))
     },
-    logout: (callback) => {
+    logout: function(callback){
       $http.get('/logout')
         .then(checkAndRun(callback))
     },
-    register: (user, callback) => {
+    register: function(user, callback){
       $http.post('/register', user)
         .then(checkAndRun(callback))
     },
-    session: ($location, $scope) => {
+    session: function($location, $scope){
       $http.get('/session')
-        .then(data => {
+        .then(function(data){
           var session = data.data;
           $scope.session = session;
-          $scope.logout = () => {
+          $scope.logout = function(){
             $http.get('/logout')
           }
           if (!('_id' in session)) {
