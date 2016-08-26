@@ -1,9 +1,10 @@
 console.log('Resources Factory');
 
-app.factory('resourcesFactory', ['$http', function($http, $cookies){
+app.factory('resourcesFactory', ['$http','$httpParamSerializer', function($http, $httpParamSerializer, $cookies){
 	function checkAndRun(callback){
 		return data => { if (typeof(callback) == 'function') callback(data.data);}
 	}
+
 	return {
 		index: (callback) => {
 			$http.get('/resources')
@@ -23,6 +24,12 @@ app.factory('resourcesFactory', ['$http', function($http, $cookies){
 		},
 		delete: (resourceID, callback) => {
 			$http.delete('/resources/'+resourceID)
+				.then(checkAndRun(callback))
+		},
+		embedly: (options, callback) => {
+			options.key = '017034fbb0324f67b350af426be2d8ad';
+			var query = $httpParamSerializer(options)
+			$http.get('https://api.embedly.com/1/oembed?'+query)
 				.then(checkAndRun(callback))
 		}
  	}

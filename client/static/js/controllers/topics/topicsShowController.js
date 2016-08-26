@@ -1,8 +1,9 @@
 app.controller('topicsShowController', 
-  ['$scope','topicsFactory','ideasFactory','usersFactory','responsesFactory','$location','$cookies','$routeParams',
-  function($scope, topicsFactory, ideasFactory, usersFactory,responsesFactory, $location, $cookies, $routeParams) {
+  ['$scope','topicsFactory','ideasFactory','usersFactory', 'votesFactory', 'responsesFactory','resourcesFactory','$location','$cookies','$routeParams',
+  function($scope, topicsFactory, ideasFactory, usersFactory, votesFactory, responsesFactory,resourcesFactory, $location, $cookies, $routeParams) {
     usersFactory.session($location, $scope);
     function getTopic(){
+
       topicsFactory.show($routeParams.id, (topic)=>{
         $scope.topic = topic;
         $scope.pageTitle = $scope.topic.title
@@ -14,10 +15,25 @@ app.controller('topicsShowController',
         if (data && "errors" in data) {
           $scope.errors = data.errors
         } else {
-          $scope.ideas = data
+          $scope.ideas = data.ideas
+          votes = {}
+          data.votes.forEach((voteTally, index) => {
+            votes[voteTally._id.idea] = {};
+            if (voteTally._id.up) {
+              votes[voteTally._id.idea].up = voteTally.count
+            } else {
+              votes[voteTally._id.idea].down = voteTally.count
+            }
+          })
+          for (x in votes) {
+            if (!('up' in votes[x])) votes[x].up = 0;
+            if (!('down' in votes[x])) votes[x].down = 0;
+          }       
+          $scope.votes = votes;
         }
       })
       $scope.showNewIdea = false;
+
     }
 
     getIdeas()
@@ -81,5 +97,6 @@ app.controller('topicsShowController',
         }
       )
     }
+
   }
 ]);

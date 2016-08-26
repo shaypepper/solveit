@@ -39,8 +39,8 @@
             <i ng-click="vote('idea', idea._id, true)" class="fa fa-2x fa-chevron-circle-up"></i>
           </a>
         </p>
-        <p class="w3-tiny">20</p>
-        <p class="w3-tiny">52</p>
+        <p class="w3-tiny">{{ votes[idea._id].up }}</p>
+        <p class="w3-tiny">{{ votes[idea._id].down }}</p>
         <p>
           <a class="w3-text-pink">
             <i ng-click="vote('idea', idea._id, false)" class="fa fa-2x fa-chevron-circle-down"></i>

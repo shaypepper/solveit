@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Idea = mongoose.model('Idea');
 var Topic = mongoose.model('Topic');
 var User = mongoose.model('User');
+var Vote = mongoose.model('Vote');
 
 function sendResults(res) {
   return (err, result) => { res.json(err? err: result); }
@@ -23,11 +24,30 @@ module.exports = {
   index: (req,res) => {
     var params = req.params.id ? {_topic: req.params.id} : {}
     Idea.find(params)
-      .populate('_user _topic votes')
+      .populate('_user _topic')
+      .populate('votes','_user up')
       .populate({path: 'responses', options: {limit: 20} })
-      .exec( 
-        sendResults(res)
-      ) 
+      .exec( function(err, result) {
+        if (err) { res.json(err); return; }
+        var returnedObj = { ideas: result }
+        Vote.aggregate([
+          { $match: { "kind": "IdeaVote" } }, 
+          { $group: {
+              _id: {up: '$up', idea: '$_idea'}, 
+              count: { $sum: 1} 
+            }
+          } 
+        ], (err, votes) => {
+          returnedObj.votes = votes
+          res.json(returnedObj)
+        })
+        
+        
+        
+      })
+        
+
+        
   },
   show:  (req,res) => { 
     Idea.findById(req.params.id, sendResults(res)) 
