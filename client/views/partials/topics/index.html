@@ -1,24 +1,74 @@
 <div moi-navbar></div>
 
-<div class="w3-card-2 w3-section w3-light-green w3-container w3-leftbar w3-border-black">
-    <h1 class="w3-left">TOPICS</h1>
-<p>
-    <button class="w3-btn w3-right" ng-click="showNewTopic = !showNewTopic">New Topic</button>
-</p>
+<!-- topics title card -->
+<div 
+  class="w3-card-2 
+        w3-section 
+        w3-light-green
+        w3-container 
+        w3-leftbar
+        w3-border-black">
+  <h1 class="w3-left">TOPICS</h1>
+  <p>
+    <button 
+      class="w3-btn w3-right" 
+      ng-click="showNewTopic = !showNewTopic">
+      <span>{{ showNewTopic ? '-' : '+' }}</span> 
+      New Topic
+    </button>
+  </p>
 </div>
- <section ng-show="showNewTopic" class="w3-card-2 w3-container w3-section w3-leftbar w3-border-amber">
-    <h3>New Topic</h3>
-    <p ng-repeat="error in errors" class="w3-text-red">{{error.message}}</p>
-   
-   <form class="w3-form">
-      <input type="text" class="w3-input" ng-model="newTopic.title" placeholder="Title...">
-      <textarea ng-model="newTopic.description" name="text" class="w3-input" placeholder="Description..."></textarea>
-      <input class="w3-btn w3-right" type="submit" ng-click='addTopic()' value="Create Topic">
-    </form>
-  </section>
 
-<div class="w3-card-2 w3-padding w3-section w3-leftbar w3-border-light-green w3-hover-khaki" ng-repeat="topic in topics"><a href = "/#/topics/{{topic._id}}">
-  <h3>{{ topic.title }}</h3>
-  <p>{{ topic.description }} </p>
-  </a>
+<!-- new topic form -->
+<section 
+  ng-show="showNewTopic" 
+  class="w3-card-2
+         w3-container 
+         w3-section 
+         w3-leftbar 
+         w3-border-amber">
+  <h3>New Topic</h3>
+ 
+  <form class="w3-form">
+    <input 
+      type="text" 
+      class="w3-input" 
+      ng-model="newTopic.title" 
+      placeholder="Title...">
+    <textarea 
+      ng-model="newTopic.description" 
+      name="text" 
+      class="w3-input" 
+      placeholder="Description...">
+    </textarea>
+    <input 
+      class="w3-btn w3-right" 
+      type="submit" 
+      ng-click='addTopic()' 
+      value="Create Topic">
+  </form>
+</section>
+
+<!-- topic cards -->
+<div  
+  ng-repeat="topic in topics" 
+  class="w3-card-2 
+        w3-padding 
+        w3-section 
+        w3-leftbar 
+        w3-border-light-green 
+        w3-hover-khaki">
+  <p>
+    <span class="w3-tag w3-light-green">
+      TOPIC
+    </span> 
+    <b>{{ topic.title }}</b>
+  </p>
+  <p>{{ topic.description }}
+    <a 
+      class="w3-btn w3-tiny"
+      href="/#/topics/{{topic._id}}">
+      More
+    </a>
+  </p>
 </div>

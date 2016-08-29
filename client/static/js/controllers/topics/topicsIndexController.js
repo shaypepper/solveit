@@ -3,6 +3,7 @@ app.controller('topicsIndexController',
   function($scope, topicsFactory, usersFactory, $location, $cookies) {
     usersFactory.session($location, $scope);
     $scope.pageTitle = "All Topics"
+    $scope.showNewTopic = false;
 
     function getTopics(){
       topicsFactory.index(function(topics){
