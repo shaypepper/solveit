@@ -1,5 +1,5 @@
 <div moi-navbar></div>
-
+<!-- title card w/ topic title and desciption -->
 <div class="w3-card-2 w3-section w3-light-green w3-container w3-leftbar w3-border-black">
   <div>
     <h1>{{ topic.title }}</h1>
@@ -24,6 +24,8 @@
     </a>
   </p>
 </div>
+
+<!-- new resource form -->
 <section 
   ng-show="showNewResource" 
   class="w3-card-2 
@@ -53,14 +55,14 @@
   </form>
 </section>
 
+<!-- resources --> 
 <div class="w3-row-padding">
   <div 
     class="w3-third" 
-    ng-repeat="resource in resources">
-    <div class="w3-section">
+    ng-repeat="(resource_type, resource_list) in resources">
+    <div class="w3-section" ng-repeat=" resource in resource_list">
       <moi-resource-show resource="resource"></moi-resource-show>
     </div>    
   </div>    
 </div>
-
 
