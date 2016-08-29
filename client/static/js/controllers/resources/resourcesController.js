@@ -9,7 +9,9 @@ app.controller('resourcesController',
         resourcesFactory.embedly({
           urls: urls.slice(0,10).join(',')
         }, function(data){
-          $scope.resources = data;
+          $scope.resources = { video: [], link: [], photo: [], rich: [] };
+          data.forEach(function(obj){ $scope.resources[obj.type].push(obj); })
+          console.log($scope.resources)
         })        
   		})
   	}
