@@ -16,8 +16,9 @@
     <!-- End Bower Components -->
     <script src="js/app.js" charset="utf-8"></script>
     
-    <script src="js/controllers/loginController.js" charset="utf-8"></script>
-    <script src="js/controllers/registerController.js" charset="utf-8"></script>
+    <script src="js/controllers/users/loginController.js" charset="utf-8"></script>
+    <script src="js/controllers/users/registerController.js" charset="utf-8"></script>
+     <script src="js/controllers/users/dashboardController.js" charset="utf-8"></script>
     <script src="js/controllers/topics/topicsIndexController.js" charset="utf-8"></script>
     <script src="js/controllers/topics/topicsShowController.js" charset="utf-8"></script>
     <script src="js/controllers/ideas/ideasShowController.js" charset="utf-8"></script>
@@ -34,7 +35,7 @@
     <script src="js/directives.js" charset="utf-8"></script>
   </head>
   <body>
-    <div id="wrapper" class="container-fluid" ng-view=''>
+    <div class="container-fluid" ng-view=''>
     </div>
     <div moi-footer></div>
   </body>

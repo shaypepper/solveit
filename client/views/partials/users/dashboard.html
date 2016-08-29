@@ -1,0 +1,18 @@
+<div moi-navbar></div>
+
+<h3>User Dashboard</h3>
+  {{ userName }} <i ng-click="showUsernameEdit = !showUsernameEdit" class="fa fa-edit"></i>
+  <section ng-show="showUsernameEdit">
+  	<form>
+  		<input type="text" class="w3-input" ng-model="userName" placeholder="{{userName}}" style="width:10%">
+  		<input type="submit" name="submit" value="Save">
+  	</form>
+  </section>
+  {{ session.last_name }} <i ng-click="showUsernameEdit = !showUsernameEdit" class="fa fa-edit"></i>
+  <section ng-show="showUsernameEdit">
+  	<form>
+  		<input type="text" class="w3-input" ng-model="userName" placeholder="{{userName}}" style="width:10%">
+  		<input type="submit" name="submit" value="Save">
+  	</form>
+  </section>
+  <p>{{session}}</p>

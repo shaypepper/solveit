@@ -9,7 +9,7 @@ app.controller('loginController',
       }
       usersFactory.login($scope.user, function(data){
         if (data.errors) $scope.errors = data.errors;
-        else $location.url('/topics')
+        else $location.url('/dashboard')
       })
     }
     $scope.navlogin = true

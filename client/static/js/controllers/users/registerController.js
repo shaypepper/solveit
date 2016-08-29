@@ -12,7 +12,7 @@ app.controller('registerController',
           $scope.errors = data.errors;
         }
         else {
-          $location.url('/topics')
+          $location.url('/dashboard')
         }
       })
     }
