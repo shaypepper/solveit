@@ -1,6 +1,11 @@
-#wrapper { width: 80%; margin: auto;}
+#wrapper { 
+  width: 80%; 
+  margin: auto;
+}
 
-.w3-allerta { font-family: "Allerta Stencil", Sans-serif; }
+.w3-allerta { 
+  font-family: "Allerta Stencil", Sans-serif; 
+}
 
 .vote-btn {
   cursor: pointer;
