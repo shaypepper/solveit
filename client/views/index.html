@@ -8,13 +8,6 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
-<!--     <style>
-        .w3-allerta {
-          font-family: "Allerta Stencil", Sans-serif;
-        }
-    </style>
-    <style type="text/css"> #wrapper { width: 80%; margin: auto;} </style> -->
-    <!-- Angular from bower_components, otherwise find the CDN -->
     <script src="angular/angular.js" charset="utf-8"></script>
     <script src="angular-route/angular-route.js" charset="utf-8"></script>
     <script src="angular-messages/angular-messages.js" charset="utf-8"></script>
@@ -30,6 +23,7 @@
     <script src="js/controllers/ideas/ideasShowController.js" charset="utf-8"></script>
     <script src="js/controllers/resources/resourcesController.js" charset="utf-8"></script>
 
+    <script src="js/factories/factoryUtilities.js" charset="utf-8"></script>
     <script src="js/factories/usersFactory.js" charset="utf-8"></script>
     <script src="js/factories/ideasFactory.js" charset="utf-8"></script>
     <script src="js/factories/topicsFactory.js" charset="utf-8"></script>
@@ -37,8 +31,7 @@
     <script src="js/factories/resourcesFactory.js" charset="utf-8"></script>
     <script src="js/factories/votesFactory.js" charset="utf-8"></script>
 
-    <script src="js/directives/navbar.js" charset="utf-8"></script>
-    <script src="js/directives/resource_embed.js" charset="utf-8"></script>
+    <script src="js/directives.js" charset="utf-8"></script>
   </head>
   <body>
     <div id="wrapper" class="container-fluid" ng-view=''>

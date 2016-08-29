@@ -5,20 +5,16 @@ app.controller('topicsIndexController',
     $scope.pageTitle = "All Topics"
 
     function getTopics(){
-      topicsFactory.index((topics)=>{
+      topicsFactory.index(function(topics){
         $scope.topics = topics;
       })
     }
     getTopics()
-     $scope.addTopic = () => {
-      topicsFactory.create($scope.newTopic, (data) => {
-        if ("errors" in data) {
-          $scope.errors = data.errors
-        } else {
-          $scope.newTopic = {};
-          getTopics()
-        }
+    $scope.addTopic = function(){
+      topicsFactory.create($scope.newTopic, $scope, function(data){
+        $scope.newTopic = {};
+        getTopics()
       });
-  }
+    }
   }
 ]);

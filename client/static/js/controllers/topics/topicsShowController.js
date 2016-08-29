@@ -3,20 +3,20 @@ app.controller('topicsShowController',
   function($scope, topicsFactory, ideasFactory, usersFactory, votesFactory, responsesFactory,resourcesFactory, $location, $cookies, $routeParams) {
     usersFactory.session($location, $scope);
     function getTopic(){
-      topicsFactory.show($routeParams.id, (topic)=>{
+      topicsFactory.show($routeParams.id, function(topic){
         $scope.topic = topic;
         $scope.pageTitle = $scope.topic.title
       })
     }
     
     function getIdeas(){
-      ideasFactory.ideasByTopic($routeParams.id, (data) => {
+      ideasFactory.ideasByTopic($routeParams.id, function(data){
         if (data && "errors" in data) {
           $scope.errors = data.errors
         } else {
           $scope.ideas = data.ideas
           votes = {}
-          data.votes.forEach((voteTally, index) => {
+          data.votes.forEach(function(voteTally, index){
             if (!(voteTally._id.idea in votes)) votes[voteTally._id.idea] = {};
             if (voteTally._id.up) {
               votes[voteTally._id.idea].up = voteTally.count
@@ -25,7 +25,7 @@ app.controller('topicsShowController',
             }
           })
           for (idea in data.ideas) {
-            let x = data.ideas[idea]._id
+            var x = data.ideas[idea]._id
             if (!(x in votes)) votes[x] = {up: 0, down: 0} 
             if (!('up' in votes[x])) votes[x].up = 0;
             if (!('down' in votes[x])) votes[x].down = 0;
@@ -40,9 +40,9 @@ app.controller('topicsShowController',
     getTopic()
     $scope.response = []
 
-    $scope.createIdea = () => {
+    $scope.createIdea = function(){
       var idea = { text: $scope.idea.text, _user: $scope.userId } 
-      ideasFactory.create($routeParams.id, idea, data => {
+      ideasFactory.create($routeParams.id, idea, function(data){
         if (data && "errors" in data) {
           $scope.errors = data.errors
         } else {
@@ -52,18 +52,17 @@ app.controller('topicsShowController',
       })
     }
 
-    $scope.toggleResponses = (idea) => {
+    $scope.toggleResponses = function(idea){
       if (!("showResponses" in idea)) {
         idea.showResponses = true;
-        console.log(idea.responses)
-        idea.agree_responses = idea.responses.filter(response => response.agree).splice(0,10)
-        idea.disagree_responses = idea.responses.filter(response => !response.agree).splice(0,10)
+        idea.agree_responses = idea.responses.filter(function(response){ return response.agree }).splice(0,10)
+        idea.disagree_responses = idea.responses.filter(function(response){ return response.agree }).splice(0,10)
       } else {
         delete idea.showResponses;
       }
     }    
 
-    $scope.toggleResponseForm = (idea) => {
+    $scope.toggleResponseForm = function(idea){
       if (!("showResponseForm" in idea)) {
         idea.showResponseForm = true;
       } else {
@@ -71,11 +70,11 @@ app.controller('topicsShowController',
       }
     }
 
-    $scope.createResponse = (idea, response) => {
+    $scope.createResponse = function(idea, response){
       response.agree = "agree" in response && response.agree === true ? true : false
       responsesFactory.createByIdeaId(idea._id,
         {text: response.text, agree: response.agree},
-        data => {
+        function(data){
           if (data && "errors" in data) {
             $scope.errors = data.errors
           } else {
@@ -85,8 +84,8 @@ app.controller('topicsShowController',
       )
     }
 
-    $scope.vote = (type, post_id, vote) => {
-      votesFactory.create({type: type, post_id: post_id, up: vote},         data => {
+    $scope.vote = function(type, post_id, vote){
+      votesFactory.create({type: type, post_id: post_id, up: vote}, function(data){
           if (data && "errors" in data) {
             $scope.errors = data.errors
           } else {
