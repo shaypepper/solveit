@@ -1,5 +1,5 @@
 app.directive('moiNavbar', function(){
-  return { templateUrl: '/partials/navbar.html' }
+  return { templateUrl: '/partials/templates/navbar.html' }
 })
 
 app.directive('moiResourceShow', function(){
@@ -9,3 +9,6 @@ app.directive('moiResourceShow', function(){
   }
 })
 
+app.directive('moiFooter', function(){
+	return {templateUrl:'/partials/templates/footer.html'}
+})
