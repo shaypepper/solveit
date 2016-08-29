@@ -1,5 +1,6 @@
 console.log('Topics Factory')
-app.factory('topicsFactory', ['$http','$cookies', function($http, $cookies) {
+app.factory('topicsFactory', ['$http','$cookies','factoryUtilities', function($http, $cookies, factoryUtilities) {
+  var util = factoryUtilities;
   function checkAndRun(callback){
     return function(data){ 
       if (typeof(callback) == 'function') {
@@ -10,23 +11,23 @@ app.factory('topicsFactory', ['$http','$cookies', function($http, $cookies) {
   return {
     index:  function(callback){
       $http.get('/topics')
-        .then(checkAndRun(callback))
+        .then(util.cbGetWrapper(callback))
     },
-    create: function(topic, callback){
+    create: function(topic, $scope, callback){
       $http.post('/topics', topic)
-        .then(checkAndRun(callback))
+        .then(util.cbPostWrapper(callback, $scope))
     },
-    update: function(topic, callback){
+    update: function(topic, $scope, callback){
       $http.put('/topics/'+topic._id, topic)
-        .then(checkAndRun(callback))
+        .then(util.cbPostWrapper(callback, $scope))
     },
     show:   function(topicID, callback){
       $http.get('/topics/'+topicID)
-        .then(checkAndRun(callback)) 
+        .then(util.cbGetWrapper(callback)) 
     },
-    delete: function(topicID, callback){
+    delete: function(topicID, $scope, callback){
       $http.delete('/topics/'+topicID)
-        .then(checkAndRun(callback)) 
+        .then(util.cbPostWrapper(callback, $scope)) 
     }
   }
 }]) 
