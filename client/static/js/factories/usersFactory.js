@@ -30,7 +30,7 @@ app.factory('usersFactory', ['$http','$cookies', function($http, $cookies) {
           if (!('_id' in session)) {
             $location.url('/login');
           } else {
-            $scope.userName = session.first_name;
+            $scope.userName = session.username;
             $scope.userId = session._id;
           }
         })

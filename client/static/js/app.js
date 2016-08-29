@@ -1,6 +1,10 @@
 var app = angular.module('app', ['ngRoute', 'ngMessages', 'ngCookies']);
 app.config(function ($routeProvider) {
   $routeProvider
+    .when('/dashboard', {
+      templateUrl: '/partials/users/dashboard.html',
+      controller: 'dashboardController'
+    })
     .when('/topics', {
       templateUrl: '/partials/topics/index.html',
       controller: 'topicsIndexController'
